@@ -73,3 +73,11 @@ CREATE TABLE messages (
   FOREIGN KEY (sender_id) REFERENCES users(user_id),
   FOREIGN KEY (receiver_id) REFERENCES users(user_id)
 );
+
+drop table messages;
+drop table matches;
+show tables;
+select * from users;
+select * from matches;
+select * from likes;
+select * from messages;

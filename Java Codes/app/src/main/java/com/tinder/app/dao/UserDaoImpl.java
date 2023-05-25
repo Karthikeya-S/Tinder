@@ -112,16 +112,16 @@ public class UserDaoImpl implements UserDao {
     }
 
     private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
+        int id = resultSet.getInt("user_id");
         String name = resultSet.getString("name");
         String city = resultSet.getString("city");
         int age = resultSet.getInt("age");
         String gender = resultSet.getString("gender");
-        int minAge = resultSet.getInt("min_age");
-        int maxAge = resultSet.getInt("max_age");
+        int minAge = resultSet.getInt("minAge");
+        int maxAge = resultSet.getInt("maxAge");
         String bio = resultSet.getString("bio");
         String interests = resultSet.getString("interests");
-        int numLikes = resultSet.getInt("num_likes");
+        int numLikes = resultSet.getInt("likes");
         String password = resultSet.getString("password");
 
         return new User(id, name, city, age, gender, minAge, maxAge, bio, interests, numLikes, password);

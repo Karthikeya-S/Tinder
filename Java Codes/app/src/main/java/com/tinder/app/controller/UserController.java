@@ -57,11 +57,17 @@ public class UserController {
     }
     public boolean login(int username, String password) {
         User user = userDao.getUserById(username);
-        if (user != null) {
+        if (user != null && user.getPassword().equals(password)) {
             System.out.println("Welcome Back user: "+username);
             return true;
         }
-        System.out.println("User not found. Please Register");
+//        else if(user==null && user.getPassword().equals(password)) {
+////        	System.out.println("User not found. Please register");
+//        }
+//        else if(user!=null && !user.getPassword().equals(password)) {
+////        	System.out.println("User not found. Please register");
+//        }
+//        System.out.println("Please check your credentials.");
         return false;
     }
     public void logout() {

@@ -11,7 +11,7 @@ public class DBConnection {
 				String username = "root";
 				String password = "Karthik1*";
 				conn = DriverManager.getConnection(url, username, password);
-				System.out.println("Connection Success");
+//				System.out.println("Connection Success");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

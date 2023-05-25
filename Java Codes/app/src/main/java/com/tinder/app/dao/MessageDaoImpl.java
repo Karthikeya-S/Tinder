@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MessageDaoImpl implements MessageDao {
-    private static final String ADD_MESSAGE_QUERY = "INSERT INTO messages(sender_id, receiver_id, message) VALUES (?, ?, ?)";
+    private static final String ADD_MESSAGE_QUERY = "INSERT INTO messages(sender_id, receiver_id, content) VALUES (?, ?, ?)";
     private static final String DELETE_MESSAGE_QUERY = "DELETE FROM messages WHERE id = ?";
-    private static final String GET_MESSAGES_BY_USER_QUERY = "SELECT * FROM messages WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?) ORDER BY created_at ASC";
+    private static final String GET_MESSAGES_BY_USER_QUERY = "SELECT * FROM messages WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?) ORDER BY timestamp";
 
     public void addMessage(Message message) {
         try  {
@@ -49,7 +49,7 @@ public class MessageDaoImpl implements MessageDao {
         }
     }
 
-    public List<Message> getMessagesByUser(User user) {
+    public void getMessagesByUser(User user) {
         List<Message> messages = new ArrayList<Message>();
 
         try {
@@ -63,22 +63,21 @@ public class MessageDaoImpl implements MessageDao {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                Message message = extractMessageFromResultSet(resultSet);
-                messages.add(message);
+//                Message message = extractMessageFromResultSet(resultSet);
+//                messages.add(message);
+            	System.out.println(resultSet.getString("content"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return messages;
     }
 
     private Message extractMessageFromResultSet(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
         int senderId = resultSet.getInt("sender_id");
         int receiverId = resultSet.getInt("receiver_id");
-        String messageText = resultSet.getString("message");
-        Timestamp createdAt = resultSet.getTimestamp("created_at");
+        String messageText = resultSet.getString("content");
+        Timestamp createdAt = resultSet.getTimestamp("timestamp");
 
         return new Message(id, senderId, receiverId, messageText, createdAt);
     }

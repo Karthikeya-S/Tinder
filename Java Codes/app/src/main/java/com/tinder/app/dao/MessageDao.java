@@ -7,5 +7,5 @@ import java.util.List;
 public interface MessageDao {
     void addMessage(Message message);
     void deleteMessage(int messageId);
-    List<Message> getMessagesByUser(User user);
+    void getMessagesByUser(User user);
 }

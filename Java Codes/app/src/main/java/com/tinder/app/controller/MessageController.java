@@ -49,20 +49,21 @@ public class MessageController {
         System.out.println("Your messages:");
 
         // Get the list of messages for the user from the messageDao
-        List<Message> messages = messageDao.getMessagesByUser(user);
-
-        if (messages.isEmpty()) {
-            System.out.println("No messages found!");
-            return;
-        }
-
-        for (Message message : messages) {
-            User sender = userDao.getUserById(message.getSenderId());
-            System.out.println("From: " + sender.getName() + " (" + sender.getCity() + ")");
-            System.out.println("Message: " + message.getContent());
-            System.out.println("Sent at: " + message.getTimestamp());
-            System.out.println();
-        }
+//        String messages = messageDao.getMessagesByUser(user);
+//
+//        if (messages.isEmpty()) {
+//            System.out.println("No messages found!");
+//            return;
+//        }
+//
+//        for (Message message : messages) {
+//            User sender = userDao.getUserById(message.getSenderId());
+//            System.out.println("From: " + sender.getName() + " (" + sender.getCity() + ")");
+//            System.out.println("Message: " + message.getContent());
+//            System.out.println("Sent at: " + message.getTimestamp());
+//            System.out.println();
+//        }
+        messageDao.getMessagesByUser(user);
     }
 }
 

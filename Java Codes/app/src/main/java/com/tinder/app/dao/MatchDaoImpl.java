@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MatchDaoImpl implements MatchDao {
-    private static final String ADD_MATCH_QUERY = "INSERT INTO matches(user_id, matched_user_id) VALUES (?, ?)";
+    private static final String ADD_MATCH_QUERY = "INSERT INTO matches(user_id1, user_id2) VALUES (?, ?)";
     private static final String DELETE_MATCH_QUERY = "DELETE FROM matches WHERE id = ?";
-    private static final String GET_MATCHES_QUERY = "SELECT u.* FROM users u INNER JOIN matches m ON u.id = m.matched_user_id WHERE m.user_id = ?";
-    private static final String GET_LIKED_USERS_QUERY = "SELECT u.* FROM users u INNER JOIN matches m ON u.id = m.matched_user_id WHERE m.user_id = ?";
+    private static final String GET_MATCHES_QUERY = "SELECT u.* FROM users u INNER JOIN matches m ON u.user_id = m.user_id2  WHERE m.user_id1 = ?";
+//    private static final String GET_MATCHES_QUERY = "SELECT * FROM matches m1, matches m2 WHERE (m1.user_id1 = m2.user_id2) AND (m1.user_id2 = m2.user_id1)";
+    private static final String GET_LIKED_USERS_QUERY = "SELECT u.* FROM users u INNER JOIN matches m ON u.user_id = m.user_id2 WHERE m.user_id1 = ?";
 
     public void addMatch(Match match) {
         try  {
@@ -86,16 +87,16 @@ public class MatchDaoImpl implements MatchDao {
     }
 
     private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("id");
+        int id = resultSet.getInt("user_id");
         String name = resultSet.getString("name");
         String city = resultSet.getString("city");
         int age = resultSet.getInt("age");
         String gender = resultSet.getString("gender");
-        int minAge = resultSet.getInt("min_age");
-        int maxAge = resultSet.getInt("max_age");
+        int minAge = resultSet.getInt("minAge");
+        int maxAge = resultSet.getInt("maxAge");
         String bio = resultSet.getString("bio");
         String interests = resultSet.getString("interests");
-        int numLikes = resultSet.getInt("num_likes");
+        int numLikes = resultSet.getInt("likes");
         String password = resultSet.getString("password");
 
         return new User(id, name, city, age, gender, minAge, maxAge, bio, interests, numLikes, password);
