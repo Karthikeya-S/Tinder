@@ -25,3 +25,51 @@ CREATE TABLE likes(
     isLike BOOLEAN
 );
 select database();
+DROP TABLE matches;
+CREATE TABLE matches (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id1 INT NOT NULL,
+  user_id2 INT NOT NULL,
+  FOREIGN KEY (user_id1) REFERENCES users(user_id),
+  FOREIGN KEY (user_id2) REFERENCES users(user_id)
+);
+select * from users where user_id = 10000;
+select database();
+show tables;
+
+CREATE TABLE users (
+  user_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  age INT NOT NULL,
+  gender VARCHAR(6) NOT NULL,
+  minAge INT NOT NULL,
+  maxAge INT NOT NULL,
+  bio TEXT,
+  interests TEXT,
+  likes INT DEFAULT 0,
+  password VARCHAR(255) NOT NULL
+);
+
+
+SELECT * from users;
+
+
+
+CREATE TABLE matches (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id1 INT NOT NULL,
+  user_id2 INT NOT NULL,
+  FOREIGN KEY (user_id1) REFERENCES users(user_id),
+  FOREIGN KEY (user_id2) REFERENCES users(user_id)
+);
+
+CREATE TABLE messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  sender_id INT NOT NULL,
+  receiver_id INT NOT NULL,
+  content TEXT NOT NULL,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (sender_id) REFERENCES users(user_id),
+  FOREIGN KEY (receiver_id) REFERENCES users(user_id)
+);
