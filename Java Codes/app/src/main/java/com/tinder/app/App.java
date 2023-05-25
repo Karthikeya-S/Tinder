@@ -18,10 +18,10 @@ public class App {
         loginOrRegister();
 
         // Display main menu
-        showMainMenu();
+//        showMainMenu();
     }
 
-    private static void loginOrRegister() {
+    public static void loginOrRegister() {
         boolean loggedIn = false;
 
         while (!loggedIn) {
@@ -30,14 +30,18 @@ public class App {
             System.out.println("3. Exit");
 
             int choice = InputUtil.promptInt("Enter your choice");
-
+            boolean flag = false;
+            
             switch (choice) {
                 case 1:
                     int username = InputUtil.promptInt("Enter your username");
                     String password = InputUtil.promptString("Enter your password");
                     loggedIn = userController.login(username, password);
-                    if (!loggedIn) {
-                        System.out.println("Invalid username or password. Please try again.");
+                    if (loggedIn) {
+                        showMainMenu(username);
+                    }
+                    else {
+                    	System.out.println("Invalid Password");
                     }
                     break;
                 case 2:
@@ -56,7 +60,7 @@ public class App {
         }
     }
 
-    private static void showMainMenu() {
+    private static void showMainMenu(int username) {
         while (true) {
             System.out.println("\nMain Menu:");
             System.out.println("1. View Matches");
@@ -70,19 +74,19 @@ public class App {
 
             switch (choice) {
                 case 1:
-                    userController.viewMatches();
+                    userController.viewMatches(username);
                     break;
                 case 2:
-                    matchController.viewLikedUsers();
+                    matchController.viewLikedUsers(username);
                     break;
                 case 3:
-                	messageController.viewMessages();
+                	messageController.viewMessages(username);
                     break;
                 case 4:
-                    matchController.likeUser();
+                    matchController.likeUser(username);
                     break;
                 case 5:
-                    messageController.sendMessage();
+                    messageController.sendMessage(username);
                     break;
                 case 6:
                     userController.logout();

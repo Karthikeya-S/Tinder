@@ -19,8 +19,8 @@ public class MessageController {
         this.messageDao = messageDao;
     }
 
-    public void sendMessage() {
-        int senderId = InputUtil.promptInt("Enter your user ID: ");
+    public void sendMessage(int username) {
+        int senderId = username;
         int receiverId = InputUtil.promptInt("Enter the ID of the user you want to send a message to: ");
         String content = InputUtil.promptString("Enter your message: ");
 
@@ -37,8 +37,8 @@ public class MessageController {
         System.out.println("Message sent successfully!");
     }
 
-    public void viewMessages() {
-        int userId = InputUtil.promptInt("Enter your user ID: ");
+    public void viewMessages(int username) {
+        int userId = username;
         User user = userDao.getUserById(userId);
 
         if (user == null) {

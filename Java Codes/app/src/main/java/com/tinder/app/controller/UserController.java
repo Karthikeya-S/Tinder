@@ -5,6 +5,7 @@ import com.tinder.app.dao.MatchDaoImpl;
 
 import java.util.List;
 
+import com.tinder.app.App;
 import com.tinder.app.dao.MatchDao;
 import com.tinder.app.model.User;
 
@@ -32,8 +33,8 @@ public class UserController {
         System.out.println("User registered successfully!");
     }
 
-    public void viewMatches() {
-        int userId = InputUtil.promptInt("Enter your user ID: ");
+    public void viewMatches(int username) {
+        int userId = username;
         User user = userDao.getUserById(userId);
 
         if (user == null) {
@@ -72,6 +73,9 @@ public class UserController {
     }
     public void logout() {
     	System.out.println("Thank you! You're logged out successfully");
-    	System.exit(0);
+//    	System.exit(0);
+    	System.out.print("\033[H\033[2J");  
+    	System.out.flush();  
+    	App.loginOrRegister();
     }
 }

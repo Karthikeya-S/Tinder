@@ -18,8 +18,8 @@ public class MatchController {
         this.matchDao = matchDao;
     }
 
-    public void likeUser() {
-        int userId = InputUtil.promptInt("Enter your user ID: ");
+    public void likeUser(int username) {
+        int userId = username;
         int likedUserId = InputUtil.promptInt("Enter the ID of the user you want to like: ");
 
         User user = userDao.getUserById(userId);
@@ -36,8 +36,8 @@ public class MatchController {
         System.out.println("You liked the user!");
     }
 
-    public void viewMatches() {
-        int userId = InputUtil.promptInt("Enter your user ID: ");
+    public void viewMatches(int username) {
+        int userId = username;
         User user = userDao.getUserById(userId);
 
         if (user == null) {
@@ -60,8 +60,8 @@ public class MatchController {
         }
     }
 
-    public void viewLikedUsers() {
-        int userId = InputUtil.promptInt("Enter your user ID: ");
+    public void viewLikedUsers(int username) {
+        int userId = username;
         User user = userDao.getUserById(userId);
 
         if (user == null) {
