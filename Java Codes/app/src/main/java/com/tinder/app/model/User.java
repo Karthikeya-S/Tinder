@@ -13,7 +13,7 @@ public class User {
     private int numOfLikes;
     private String password;
 
-    public User(String name, String city, int age, String gender, int minAge, int maxAge, String bio, String password) {
+    public User(String name, String city, int age, String gender, int minAge, int maxAge, String bio, String interests, String password) {
         this.name = name;
         this.city = city;
         this.age = age;
@@ -21,7 +21,7 @@ public class User {
         this.minAge = minAge;
         this.maxAge = maxAge;
         this.bio = bio;
-//        this.interests = interests;
+        this.interests = interests;
         this.numOfLikes = 0;
         this.password = password;
     }

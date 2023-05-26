@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_USER_QUERY = "UPDATE users SET name = ?, city = ?, age = ?, gender = ?, minAge = ?, maxAge = ?, bio = ?, interests = ?, no_of_likes = ?, password = ? WHERE user_id = ?";
     private static final String DELETE_USER_QUERY = "DELETE FROM users WHERE user_id = ?";
     private static final String GET_USER_BY_ID_QUERY = "SELECT * FROM users WHERE user_id = ?";
-    private static final String GET_ALL_USERS_QUERY = "SELECT * FROM users";
+//    private static final String GET_ALL_USERS_QUERY = "SELECT * FROM users";
 
     public void addUser(User user) {
         try {
@@ -93,22 +93,43 @@ public class UserDaoImpl implements UserDao {
 
         return user;
     }
-    public List<User> getAllUsers() {
-        List<User> users = new ArrayList<User>();
-
-        try {
-        	Connection connection = DBConnection.createDBConnection();
-            PreparedStatement statement = connection.prepareStatement(GET_ALL_USERS_QUERY);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                User user = extractUserFromResultSet(resultSet);
-                users.add(user);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return users;
+//    public List<User> getAllUsers() {
+//        List<User> users = new ArrayList<User>();
+//
+//        try {
+//        	Connection connection = DBConnection.createDBConnection();
+//            PreparedStatement statement = connection.prepareStatement(GET_ALL_USERS_QUERY);
+//            ResultSet resultSet = statement.executeQuery();
+//            while (resultSet.next()) {
+//                User user = extractUserFromResultSet(resultSet);
+//                users.add(user);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        for(int i=0;i<users.size();i++) {
+//        	System.out.println(users.get(i));
+//        }
+//        return users;
+//    }
+    public void getAllUsers(int username) {
+    	Connection connection = DBConnection.createDBConnection();
+    	String query = "SELECT user_id,name,city,age,interests FROM users WHERE NOT user_id = "+username;
+    	System.out.println("------------------------------------------------------");
+		System.out.printf("%s\t%s\t\t%s\t\t%s\t%s","ID","NAME","CITY","AGE","INTERESTS");
+		System.out.println();
+		System.out.println("------------------------------------------------------");
+		try {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				System.out.printf("%d\t%s\t\t%s\t\t%d\t%s", rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4), rs.getString(5));
+				System.out.println();
+				System.out.println("------------------------------------------------");
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
     }
 
     private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {

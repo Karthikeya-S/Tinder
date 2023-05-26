@@ -20,8 +20,8 @@ public class MatchController {
 
     public void likeUser(int username) {
         int userId = username;
+        userDao.getAllUsers(username);
         int likedUserId = InputUtil.promptInt("Enter the ID of the user you want to like: ");
-
         User user = userDao.getUserById(userId);
         User likedUser = userDao.getUserById(likedUserId);
 

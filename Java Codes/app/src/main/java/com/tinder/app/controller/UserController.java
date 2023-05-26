@@ -3,6 +3,7 @@ import com.tinder.app.utils.InputUtil;
 import com.tinder.app.dao.UserDaoImpl;
 import com.tinder.app.dao.MatchDaoImpl;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.tinder.app.App;
@@ -26,9 +27,10 @@ public class UserController {
         int minAge = InputUtil.promptInt("Enter the minimum age preference: ");
         int maxAge = InputUtil.promptInt("Enter the maximum age preference: ");
         String bio = InputUtil.promptString("Enter your bio: ");
+        String interests = InputUtil.promptString("Enter your interests: ");
         String password = InputUtil.promptString("Enter your password: ");
 
-        User user = new User(name, city, age, gender, minAge, maxAge, bio, password);
+        User user = new User(name, city, age, gender, minAge, maxAge, bio, interests, password);
         userDao.addUser(user);
         System.out.println("User registered successfully!");
     }
@@ -71,11 +73,10 @@ public class UserController {
 //        System.out.println("Please check your credentials.");
         return false;
     }
-    public void logout() {
+    public void logout() throws InterruptedException, IOException {
     	System.out.println("Thank you! You're logged out successfully");
 //    	System.exit(0);
-    	System.out.print("\033[H\033[2J");  
-    	System.out.flush();  
+    	new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
     	App.loginOrRegister();
     }
 }

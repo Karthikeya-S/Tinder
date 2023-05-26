@@ -1,5 +1,8 @@
 package com.tinder.app;
 import com.tinder.app.controller.UserController;
+
+import java.io.IOException;
+
 import com.tinder.app.controller.MatchController;
 import com.tinder.app.controller.MessageController;
 import com.tinder.app.utils.InputUtil;
@@ -11,7 +14,7 @@ public class App {
     private static final MessageController messageController = new MessageController();
     private static final MatchController matchController = new MatchController();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException, IOException {
         System.out.println("Welcome to Command Line Tinder!");
 
         // Prompt the user to login or register
@@ -21,7 +24,7 @@ public class App {
 //        showMainMenu();
     }
 
-    public static void loginOrRegister() {
+    public static void loginOrRegister() throws InterruptedException, IOException {
         boolean loggedIn = false;
 
         while (!loggedIn) {
@@ -60,7 +63,7 @@ public class App {
         }
     }
 
-    private static void showMainMenu(int username) {
+    private static void showMainMenu(int username) throws InterruptedException, IOException {
         while (true) {
             System.out.println("\nMain Menu:");
             System.out.println("1. View Matches");

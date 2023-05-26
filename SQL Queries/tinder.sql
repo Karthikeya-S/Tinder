@@ -77,7 +77,11 @@ CREATE TABLE messages (
 drop table messages;
 drop table matches;
 show tables;
-select * from users;
+select * from users WHERE NOT user_id = 1 
+IF gender = male, SELECT female;
+SELECT *
+FROM users u1
+JOIN users u2 ON u1.gender <> u2.gender;
 select * from matches;
 select * from likes;
 select * from messages;
